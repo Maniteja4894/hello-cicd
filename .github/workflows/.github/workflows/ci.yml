@@ -1,0 +1,23 @@
+name: My First CI Pipeline
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Check website
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get the code
+        uses: actions/checkout@v4
+
+      - name: Check that the website exists
+        run: test -f index.html
+
+      - name: Check website content
+        run: grep -q "Hello CI/CD!" index.html
